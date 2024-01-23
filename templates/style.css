@@ -1,0 +1,94 @@
+h2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    font-size: 50px;
+  }
+
+h2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    font-size: 33px;
+  }
+
+body {
+    background: linear-gradient(to right, #5b5b62, #858385);
+    color: white;
+    font-family: Anura;
+    overflow: hidden;
+    z-index: 0; 
+    padding-top: 200px;
+    transition: opacity 0.5s; 
+    animation: transitionIn 0.5s;
+  }
+  @keyframes transitionIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  .page {
+    text-align: center;
+  }
+    
+  .button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    outline: 2px solid #b09a51;
+  }
+  
+  .button-wrapper {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+  button:hover {
+    background-color: #8e7a3f;
+    color: white;
+  }
+  
+  button:active {
+    background-color: #5c502b; 
+    color: white; 
+  }
+
+  .button i {
+    font-size: 20px;
+  }
+  
+  .change-pages-container {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }

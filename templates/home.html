@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Page Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <title>Image Classification</title>
+        <h1>Image Classification</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            <input class="button" type="file" name="file" accept="image/*" required>
+            <div class="button-wrapper">
+                <button class="button" type="submit">Upload Image</button>
+            </div>
+        </form>
+    
+
+    <!-- {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+
+    {% if predictions %}
+        <h2>Predictions:</h2>
+        <ul>
+            {% for label, score in predictions %}
+                <li>{{ label }}: {{ score }}%</li>
+            {% endfor %}
+        </ul>
+    {% endif %} -->
+
+
+    <div class="change-pages-container">
+        <button class="button" onclick="navigateToPage('info.html')">
+          <i class="fas fa-arrow-right"></i> NEXT
+        </button>
+      </div>
+    </div>
+  </div>
+  
+    <script>
+      function toggleText() {
+        var text = document.querySelector('.text');
+        if (text.style.display === 'none') {
+          text.style.display = 'block';
+        } else {
+          text.style.display = 'none';
+        }
+      }
+
+  
+      function navigateToPage(page) {
+      document.body.style.opacity = 0;
+      setTimeout(function() {
+        window.location.href = page;
+      }, 500);
+      }
+      
+    </script>
+
+</body>
+</html>

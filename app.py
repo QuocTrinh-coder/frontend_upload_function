@@ -32,7 +32,7 @@ def home():
     # Display the top three predicted labels
     top_predictions = [(label, round(score * 100, 2)) for (_, label, score) in decoded_predictions]
     print(top_predictions)
-    return render_template('index.html', msg='Your image has been uploaded', predictions=top_predictions)
+    return render_template('home.html', msg='Your image has been uploaded', predictions=top_predictions)
 
 if __name__ == '__main__':
     app.run()

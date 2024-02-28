@@ -1,38 +1,58 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from PIL import Image
 import numpy as np
-from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+import tkinter
+from tkinter import *
+from chatapp import ChatApp as cA  # Importing ChatApp class from chatapp module
+import os  # Importing the os module for path operations
+from keras.models import load_model #  A function from Keras to load a pre-trained neural network model.
+import nltk
+import utils as u
+import json
+
+# Load pre-trained model and necessary data
+pre_trained_model = load_model('chatbot_model.h5')
+lemmatizer = nltk.stem.WordNetLemmatizer()
+words = u.load_pickle(os.path.join('pickles', 'words.pkl'))
+classes = u.load_pickle(os.path.join('pickles', 'classes.pkl'))
+intents = json.loads(open('data.json').read())
+
+# Create ChatApp instance with pre-trained model and data
+ex = cA(pre_trained_model, lemmatizer, words, classes, intents)
 
 app = Flask(__name__)
 
-# Load pre-trained ResNet50 model
-model = ResNet50(weights='imagenet')
+@app.route("/")
+def index():
+    return render_template('home.html')
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    # this is to open the website, when we click the link,, the request method is get so the function return the website with empty message on the website
-    if request.method == 'GET':
-        return render_template('index.html', msg='')
+@app.route("/upload", methods=["POST"])
+def upload_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"})
+    if request.method == 'POST':
+        image = request.files['file']
+        img = Image.open(image)
+        img = np.array(img)
 
-    
-    image = request.files['file']
-    img = Image.open(image)
-    img = img.resize((224, 224))  # Resize image to match ResNet50 input size
-    img_array = np.array(img)
-    if img_array.shape[-1] == 4:
-        img_array = img_array[:, :, :3]  # Keep only the RGB channels, discard the alpha channel
+    print(img)
+    print(img.shape)
 
-    img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
-    img_array = preprocess_input(img_array)
+    return jsonify({"message": "Your image has been uploaded"})
 
-    # Use ResNet50 to predict the image class
-    predictions = model.predict(img_array)
-    decoded_predictions = decode_predictions(predictions, top=3)[0]
+@app.route("/chat", methods=["POST"])
+def chat():
+    msg = request.form.get("msg")  # Get the message from the form
+    response = get_chat_response(msg)  # Get the chatbot response
+    return jsonify({"response": response})  # Return the response to the client
 
-    # Display the top three predicted labels
-    top_predictions = [(label, round(score * 100, 2)) for (_, label, score) in decoded_predictions]
-    print(top_predictions)
-    return render_template('home.html', msg='Your image has been uploaded', predictions=top_predictions)
+def get_chat_response(text):
+    # Let's chat for 5 lines
+    if text != '':
+        res = ex.chatbot_response(text)  # Using the instance of ChatApp
+        return res  # Return the response
+    else:
+        return "Message is empty"  # Return an error message if the message is empty
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    app.run(port=5001)

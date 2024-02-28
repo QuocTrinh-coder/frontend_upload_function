@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from PIL import Image
 import numpy as np
-import tkinter
-from tkinter import *
 from chatapp import ChatApp as cA  # Importing ChatApp class from chatapp module
 import os  # Importing the os module for path operations
 from keras.models import load_model #  A function from Keras to load a pre-trained neural network model.

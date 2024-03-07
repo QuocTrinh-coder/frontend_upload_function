@@ -39,7 +39,7 @@ class ChatModel:
         
         # confusion matrix, uncomment to see the matrix
         
-        #self.print_confusion_matrix(self._test_x, self._test_y)
+        # self.print_confusion_matrix(self._test_x, self._test_y)
     # tokenizing method
     def tokenizing(self,url):
         words=[]
@@ -168,10 +168,10 @@ class ChatModel:
     def get_intents(self):
         return self._intents
     
-    # def train_test_split(self, test_size=0.4):
-    #     # Split the data into training and testing sets
-    #     train_x, test_x, train_y, test_y = train_test_split(self._train_x, self._train_y, test_size=test_size, random_state=40)
-    #     return train_x, test_x, train_y, test_y
+    def train_test_split(self, test_size=0.4):
+        # Split the data into training and testing sets
+        train_x, test_x, train_y, test_y = train_test_split(self._train_x, self._train_y, test_size=test_size, random_state=40)
+        return train_x, test_x, train_y, test_y
 
     def evaluate_model(self, test_x, test_y):
         # Evaluate the model on the test data
@@ -257,3 +257,4 @@ class ChatModel:
 # avg_mse, avg_accuracy = ex.k_fold_cross_validation(k=5)
 # print("Average MSE:", avg_mse)
 # print("Average Accuracy:", avg_accuracy)
+

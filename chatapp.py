@@ -51,12 +51,15 @@ class ChatApp:
             if i['tag'] == tag:
                 result = random.choice(i['responses'])
                 break
+        else:
+            result = "I'm sorry, I don't understand that."
         return result
 
     def chatbot_response(self, text):
         ints = self.predict_class(text)
         res = self.getResponse(ints)
         return res
+
 
 # # Load pre-trained model and necessary data
 # pre_trained_model = load_model('chatbot_model.h5')

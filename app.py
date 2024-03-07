@@ -53,4 +53,4 @@ def get_chat_response(text):
         return "Message is empty"  # Return an error message if the message is empty
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=5002)

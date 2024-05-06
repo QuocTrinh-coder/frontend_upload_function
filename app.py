@@ -44,6 +44,18 @@ def chat():
     response = get_chat_response(msg)  # Get the chatbot response
     return jsonify({"response": response})  # Return the response to the client
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
+@app.route("/usage")
+def usage():
+    return render_template('usage.html')
+
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
+
 def get_chat_response(text):
     # Let's chat for 5 lines
     if text != '':
